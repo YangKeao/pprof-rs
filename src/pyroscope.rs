@@ -62,7 +62,7 @@ fn merge_tags_with_app_name(
     format!(
         "{}{}",
         application_name,
-        tags.map(|tags| { tags }
+        tags.map(|tags| tags
             .into_iter()
             .filter(|(k, _)| k != "__name__")
             .map(|(k, v)| format!("{}={}", k, v))
