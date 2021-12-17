@@ -221,6 +221,10 @@ mod pyroscope {
 
             self.fold(true, &mut buffer)?;
 
+            if buffer.is_empty() {
+                return Ok(());
+            }
+
             let client = reqwest::Client::new();
             // TODO: handle the error of this request
 
@@ -237,7 +241,7 @@ mod pyroscope {
 
             client
                 .post(format!("{}/ingest", url.as_ref()))
-                .header("Content-Type", "application/json")
+                .header("Content-Type", "binary/octet-stream")
                 .query(&[
                     ("name", application_name.as_ref()),
                     ("from", &format!("{}", s_start)),
